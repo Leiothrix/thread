@@ -4,19 +4,28 @@
  */
 public class MyRunnable implements Runnable {
 
-    private int ticket = 5;
+    /**
+     * 五个业务员一起卖10张票
+     */
+    private int ticket = 10;
 
+    @Override
     public void run() {
-        for (int i = 0; i < 5; i++) {
+        // task表示每个业务员分配的业务量
+        int task = 2;
+        for (int i = 0; i < task; i++) {
             if (ticket > 0) {
                 System.out.println("R公司" + Thread.currentThread().getName() + "卖了一张票，编号为r" + (ticket--));
             }
         }
     }
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         MyRunnable myRunnable = new MyRunnable();
         new Thread(myRunnable, "1号业务员").start();
         new Thread(myRunnable, "2号业务员").start();
+        new Thread(myRunnable, "3号业务员").start();
+        new Thread(myRunnable, "4号业务员").start();
+        new Thread(myRunnable, "5号业务员").start();
     }
 }
